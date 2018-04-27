@@ -37,25 +37,25 @@ $(document).ready(function(){
               <div class="card-body">
                 <h5>`+ response.data[i].practices[0].visit_address.street+'<br>' + response.data[i].practices[0].visit_address.city +', ' +response.data[i].practices[0].visit_address.state + " " + response.data[i].practices[0].visit_address.zip +`</h5><p>Phone: `+ response.data[i].practices[0].phones[0].number +
               `</div>`
-              );
+            );
             if(response.data[i].practices[0].accepts_new_patients === true){
-              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>")
+              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>");
             } else {
-              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div>")
+              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div>");
             }
             if(response.data[i].practices[0].website != undefined){
-              $(".results").append('<h4><a href ="'+response.data[i].practices[0].website+'">'+response.data[i].practices[0].name+'</a></h4></div')
+              $(".results").append('<h4><a href ="'+response.data[i].practices[0].website+'">'+response.data[i].practices[0].name+'</a></h4></div');
             } else{
-              $(".results").append('</div>')
+              $(".results").append('</div>');
             }
           }
         } else {
-          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>');
         }
       }).fail(function(error){
         $(".results").html(`<div class="alert alert-danger">There was an error processing your request: ${error.responseText}</div>`);
       });
-////// Search function for doctor name only /////
+      ////// Search function for doctor name only /////
     } else if (issueInput === "" && nameInput != "") {
       nameAPI = newCall.nameSearch(nameInput);
       nameAPI.then(function(response){
@@ -70,20 +70,20 @@ $(document).ready(function(){
               <div class="card-body">`
                 + response.data[j].practices[0].visit_address.street+'<br>' + response.data[j].practices[0].visit_address.city +', ' +response.data[j].practices[0].visit_address.state + " " + response.data[j].practices[0].visit_address.zip +`</h5><p>Phone: ` + response.data[j].practices[0].phones[0].number +
               `</div>`
-          );
+            );
             if(response.data[j].practices[0].accepts_new_patients === true){
-              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>")
+              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>");
             } else {
-              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div></div>")
+              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div></div>");
             }
           }
           if(response.data[j].practices[0].website != undefined){
-            $(".results").append('<h4><a href ="'+response.data[j].practices[0].website+'">'+response.data[j].practices[0].name+'</a></h4></div>')
+            $(".results").append('<h4><a href ="'+response.data[j].practices[0].website+'">'+response.data[j].practices[0].name+'</a></h4></div>');
           } else {
             $(".results").append('</div>');
           }
         } else {
-          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>');
         }
       }).fail(function(error){
         $(".results").html(`<div class="alert alert-danger">There was an error processing your request: ${error.responseText}</div>`);
@@ -102,20 +102,20 @@ $(document).ready(function(){
               <div class="card-body">`
                 + response.data[k].practices[0].visit_address.street+'<br>' + response.data[k].practices[0].visit_address.city +', ' +response.data[k].practices[0].visit_address.state + " " + response.data[k].practices[0].visit_address.zip +`</h5><p>Phone: ` + response.data[k].practices[0].phones[0].number +
               `</div>`
-          );
+            );
             if(response.data[k].practices[0].accepts_new_patients === true){
-              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>")
+              $(".results").append("<div class='alert alert-success'>"+"This doctor is currently accepting new patients!"+"</div></div>");
             } else {
-              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div></div>")
+              $(".results").append("<div class='alert alert-warning'>"+"This doctor is not currently accepting new patients."+"</div></div>");
             }
           }
           if(response.data[k].practices[0].website != undefined){
-            $(".results").append('<h4><a href ="'+response.data[k].practices[0].website+'">'+response.data[k].practices[0].name+'</a></h4></div>')
+            $(".results").append('<h4><a href ="'+response.data[k].practices[0].website+'">'+response.data[k].practices[0].name+'</a></h4></div>');
           } else {
-            $('.results').append('</div>')
+            $('.results').append('</div>');
           }
         } else {
-          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>');
         }
       }).fail(function(error){
         $(".results").html(`<div class="alert alert-danger"> There was an error processing your request: ${error.responseText} </div>`);
