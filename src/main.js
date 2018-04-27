@@ -21,13 +21,21 @@ $(document).ready(function(){
     if (issueInput != "" && nameInput === ""){
       issueAPI = newCall.issueSearch(issueInput);
       issueAPI.then(function(response){
-        $(".results").text(response.data[0].practices.name);
-      })
+        // let doctorArray;
+        // let doctorArrayLength;
+        // let i;
+        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+      });
     } else if (issueInput === "" && nameInput != "") {
       nameAPI = newCall.nameSearch(nameInput)
+      nameAPI.then(function(response){
+        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+      });
     } else if (issueInput != "" && nameInput != ""){
       hybridAPI = newCall.hybridSearch(issueInput,nameInput);
+      hybridAPI.then(function(response){
+        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`)
+      });
     }
   });
 });
-// var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?location=45.523,-122.676,100&skip=2&limit=10&user_key=' + api_key;
