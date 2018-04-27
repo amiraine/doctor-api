@@ -24,17 +24,35 @@ $(document).ready(function(){
         // let doctorArray;
         // let doctorArrayLength;
         // let i;
-        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+        if(response.meta.total != 0){
+          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+        } else {
+          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+        }
+      }).fail(function(error){
+        $(".results").text(`There was an error processing your request: ${error.responseText}`);
       });
     } else if (issueInput === "" && nameInput != "") {
       nameAPI = newCall.nameSearch(nameInput)
       nameAPI.then(function(response){
-        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+        if(response.meta.total !=0){
+          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+        } else {
+          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+        }
+      }).fail(function(error){
+        $(".results").text(`There was an error processing your request: ${error.responseText}`);
       });
     } else if (issueInput != "" && nameInput != ""){
       hybridAPI = newCall.hybridSearch(issueInput,nameInput);
       hybridAPI.then(function(response){
-        $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`)
+        if(response.meta.total !=0){
+          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`)
+        } else {
+          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+        }
+      }).fail(function(error){
+        $(".results").text(`There was an error processing your request: ${error.responseText}`);
       });
     }
   });

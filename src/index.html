@@ -6,11 +6,20 @@
   </head>
   <body>
     <div class="container-fluid">
-      <form class="search">
-        <input type="text" id="issue">
-        <input type="text" id="name">
-        <button type="submit" class="btn btn-info">Search</button>
-      </form>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Search for a doctor in the Portland metro area today!</h5>
+        </div>
+        <div class="card-body">
+          <form class="search">
+            <label for="issue-text">Your medical problem</label>
+            <br><input name="issue-text" type="text" id="issue">
+            <br><label for="name-text">Doctor's name</label>
+            <br><input name="name-text" type="text" id="name">
+            <br><button type="submit" class="btn btn-info">Search</button>
+          </form>
+        </div>
+      </div>
       <div class="results">
 
       </div>
