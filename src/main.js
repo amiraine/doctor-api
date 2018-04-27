@@ -21,11 +21,21 @@ $(document).ready(function(){
     if (issueInput != "" && nameInput === ""){
       issueAPI = newCall.issueSearch(issueInput);
       issueAPI.then(function(response){
-        // let doctorArray;
-        // let doctorArrayLength;
-        // let i;
+        let doctorArrayLength;
+        let i;
+        doctorArrayLength = response.data.length;
+        console.log(doctorArrayLength);
+
         if(response.meta.total != 0){
-          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+          for(i=0; i < doctorArrayLength; i++){
+            $(".results").html(`<h3>`+ response.data[i].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5><p>Phone: `+ response.data[0].practices[0].phones[0].number);
+            if(response.data[i].practices[0].accepts_new_patients === true){
+              $(".results").append("<h4>"+"This doctor is currently accepting new patients!"+"</h4>")
+            } else {
+              $(".results").append("<h4>"+"This doctor is not currently accepting new patients."+"</h4>")
+            }
+            console.log(i);
+          }
         } else {
           $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
         }
