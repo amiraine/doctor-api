@@ -1,5 +1,5 @@
 //declaring a class which will make API calls
-import $ from 'jquery'
+import $ from 'jquery';
 
 class API{
   issueSearch(issue){

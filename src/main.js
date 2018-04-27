@@ -24,31 +24,34 @@ $(document).ready(function(){
         let doctorArrayLength;
         let i;
         doctorArrayLength = response.data.length;
-        console.log(doctorArrayLength);
-
         if(response.meta.total != 0){
           for(i=0; i < doctorArrayLength; i++){
-            $(".results").html(`<h3>`+ response.data[i].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5><p>Phone: `+ response.data[0].practices[0].phones[0].number);
+            $(".results").append(`<h3>`+ response.data[i].practices[0].name + `</h3><h5>`+ response.data[i].practices[0].visit_address.street+'<br>' + response.data[i].practices[0].visit_address.city +', ' +response.data[i].practices[0].visit_address.state + " " + response.data[i].practices[0].visit_address.zip +`</h5><p>Phone: `+ response.data[i].practices[0].phones[0].number);
             if(response.data[i].practices[0].accepts_new_patients === true){
               $(".results").append("<h4>"+"This doctor is currently accepting new patients!"+"</h4>")
             } else {
               $(".results").append("<h4>"+"This doctor is not currently accepting new patients."+"</h4>")
             }
-            console.log(i);
           }
         } else {
-          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
         }
       }).fail(function(error){
         $(".results").text(`There was an error processing your request: ${error.responseText}`);
       });
+////// Search function for doctor name only /////
     } else if (issueInput === "" && nameInput != "") {
-      nameAPI = newCall.nameSearch(nameInput)
+      nameAPI = newCall.nameSearch(nameInput);
       nameAPI.then(function(response){
+        let doctorNameArrayLength;
+        let j;
+        doctorNameArrayLength = response.data.length;
         if(response.meta.total !=0){
-          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`);
+          for(j=0; j<doctorNameArrayLength; j++){
+            $(".results").append(`<h3>`+ response.data[j].practices[0].name + `</h3><h5>`+ response.data[j].practices[0].visit_address.street+'<br>' + response.data[j].practices[0].visit_address.city +', ' +response.data[j].practices[0].visit_address.state + " " + response.data[j].practices[0].visit_address.zip +`</h5><p>Phone: ` + response.data[j].practices[0].phones[0].number);
+          }
         } else {
-          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
         }
       }).fail(function(error){
         $(".results").text(`There was an error processing your request: ${error.responseText}`);
@@ -56,10 +59,15 @@ $(document).ready(function(){
     } else if (issueInput != "" && nameInput != ""){
       hybridAPI = newCall.hybridSearch(issueInput,nameInput);
       hybridAPI.then(function(response){
+        let doctorHybrid;
+        let k;
+        doctorHybrid = response.data.lengh;
         if(response.meta.total !=0){
-          $(".results").html(`<h3>`+ response.data[0].practices[0].name + `</h3><h5>`+ response.data[0].practices[0].visit_address.street+' '+response.data[0].practices[0].visit_address.street2 + '<br>' + response.data[0].practices[0].visit_address.city +', ' +response.data[0].practices[0].visit_address.state + " " + response.data[0].practices[0].visit_address.zip +`</h5>`)
+          for(k=0;k<doctorHybrid;k++){
+            $(".results").append(`<h3>`+ response.data[k].practices[0].name + `</h3><h5>`+ response.data[k].practices[0].visit_address.street+'<br>' + response.data[k].practices[0].visit_address.city +', ' +response.data[k].practices[0].visit_address.state + " " + response.data[k].practices[0].visit_address.zip +`</h5><p>Phone: ` + response.data[k].practices[0].phones[0].number)
+          }
         } else {
-          $(".results").html('<h3>No results matched your criteria. Please check your spelling or try another search</h3>')
+          $(".results").html('<div class="alert alert-danger">No results matched your criteria. Please check your spelling or try another search</div>')
         }
       }).fail(function(error){
         $(".results").text(`There was an error processing your request: ${error.responseText}`);
