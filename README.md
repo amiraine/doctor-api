@@ -1,4 +1,4 @@
-#Doctor Lookup
+# Doctor Lookup
 
 #### A program for searching for health professionals - 4/27/2018
 
@@ -24,8 +24,11 @@ A program that will search for doctors within a database using user criteria usi
 ## Setup/Installation Requirements
 
 1. Clone from GitHub repository [https://github.com/amiraine/doctor-api.git]
-2. run npm install in terminal to install dependencies for webpack
-3. Open index.html in web browser.
+2. Navigate to project root directory and run `npm install` in terminal to install dependencies for webpack.
+3. Acquire an API key from https://developer.betterdoctor.com/
+4. Create file called '.env' in the root directory of the project.
+5. inside of the .env file, add the API key using the following: `exports.apiKey=YOUR-API-KEY`
+6. To view the site, run `npm run start` in the terminal while in the root directory. 
 
 ## Known Bugs
 * No known bugs at this time.
